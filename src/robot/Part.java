@@ -149,5 +149,5 @@ public final class Part {
         return PartType.CHASIS.equals(getPartType());
     }
     
-    public static Part headPart = new Part("Head Part", 5, 5, 0, 0, 0, 0, 0, Ability.scratch, PartType.HEAD);
+    public static Part headPart = new Part("Head Part", 1, 1, 0, 0, 0, 0, 0, Ability.headbutt, PartType.HEAD);
 }

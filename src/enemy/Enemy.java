@@ -54,6 +54,6 @@ public final class Enemy extends Robot{
                 + "Special Attack: " + getBaseSpecAttack() + "\n"
                 + "Physical Defense: " + getBasePhysDefense() + "\n"
                 + "Special Defense: " + getBaseSpecDefense() + "\n"
-                + "Speed: " + getBaseSpeed() + "\n\n");
+                + "Speed: " + getBaseSpeed() + "\n");
     }
 }

@@ -2,7 +2,7 @@ package robot;
 
 import java.util.ArrayList;
 import robot.Ability.DamageType;
-import util.RNG.Dice;
+
 
 /**
  *
@@ -29,7 +29,7 @@ public class Robot {
     //private Dice specDefenseRate = new Dice( 1, 3 );
     private int speed;
     //private Dice speedRate = new Dice( 1, 3 );
-    private ArrayList<Ability> abilities;
+    private ArrayList<Ability> abilities = new ArrayList();
 
     public Robot() {
         name = "Bot";
@@ -43,6 +43,10 @@ public class Robot {
         setPhysDefense(1);
         setSpecDefense(1);
         setSpeed(1);
+        addAbility(Ability.scratch);
+        addAbility(Ability.punch);
+        addAbility(Ability.kick);
+        addAbility(Ability.headbutt);
     }
 
     // Name
@@ -69,9 +73,7 @@ public class Robot {
     }
 
     public void setHealth(int health) {
-        System.out.println("old health " + this.health);
         this.health = health;
-        System.out.println("new health " + this.health);
     }
 
     // Max Health
@@ -84,9 +86,7 @@ public class Robot {
     }
 
     public void setMaxHealth(int maxHealth) {
-        System.out.println("old maxHealth " + this.maxHealth);
         this.maxHealth = maxHealth;
-        System.out.println("new maxHealth " + this.maxHealth);
     }
     
     // Shield
@@ -95,9 +95,7 @@ public class Robot {
     }
 
     public void setShield(int shield) {
-        System.out.println("old shield " + this.shield);
         this.shield = shield;
-        System.out.println("new shield " + this.shield);
     }
     
     // Max Shield
@@ -110,9 +108,7 @@ public class Robot {
     }
 
     public void setMaxShield(int maxShield) {
-        System.out.println("old maxShield " + this.maxShield);
         this.maxShield = maxShield;
-        System.out.println("new maxShield " + this.maxShield);
     }
 
     // Phys Attack
@@ -125,9 +121,7 @@ public class Robot {
     }
 
     public void setPhysAttack(int physAttack) {
-        System.out.println("old physAttack " + this.physAttack);
         this.physAttack = physAttack;
-        System.out.println("new physAttack " + this.physAttack);
     }
 
     // Phys Defense
@@ -140,9 +134,7 @@ public class Robot {
     }
 
     public void setPhysDefense(int physDefense) {
-        System.out.println("old physDefense " + this.physDefense);
         this.physDefense = physDefense;
-        System.out.println("new physDefense " + this.physDefense);
     }
 
     // Spec Attack
@@ -155,9 +147,7 @@ public class Robot {
     }
 
     public void setSpecAttack(int specAttack) {
-        System.out.println("old specAttack " + this.specAttack);
         this.specAttack = specAttack;
-        System.out.println("new specAttack " + this.specAttack);
     }
 
     // Spec Defense
@@ -170,9 +160,7 @@ public class Robot {
     }
 
     public void setSpecDefense(int specDefense) {
-        System.out.println("old specDefense " + this.specDefense);
         this.specDefense = specDefense;
-        System.out.println("new specDefense " + this.specDefense);
     }
 
     // Mod Attack
@@ -207,9 +195,7 @@ public class Robot {
     }
 
     public void setSpeed(int speed) {
-        System.out.println("old speed " + this.speed);
         this.speed = speed;
-        System.out.println("new speed " + this.speed);
     }
 
     // Abilities

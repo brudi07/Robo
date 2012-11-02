@@ -41,6 +41,6 @@ public class Player extends Robot {
                 + "Physical Defense: " + getBasePhysDefense() + "\n"
                 + "Special Defense: " + getBaseSpecDefense() + "\n"
                 + "Speed: " + getBaseSpeed() + "\n"
-                + "Gold: " + getGold() + "\n\n");
+                + "Gold: " + getGold() + "\n");
     }
 }

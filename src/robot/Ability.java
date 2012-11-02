@@ -76,4 +76,7 @@ public final class Ability {
 	}
 	
 	public static Ability scratch = new Ability("Scratch", "Normal", DamageType.PHYSICAL, 1, 20);
+        public static Ability punch = new Ability("Punch", "Normal", DamageType.PHYSICAL, 2, 20);
+        public static Ability kick = new Ability("Kick", "Normal", DamageType.PHYSICAL, 2, 20);
+        public static Ability headbutt = new Ability("Headbutt", "Normal", DamageType.PHYSICAL, 1, 80);
 }

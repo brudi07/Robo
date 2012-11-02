@@ -1,7 +1,9 @@
 package run;
 
-import gui.MainMenu;
-import javax.swing.UIManager;
+import battle.Battle;
+import enemy.Enemy;
+import player.Player;
+import robot.Ability;
 
 /**
  *
@@ -15,14 +17,18 @@ public class Run {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             @Override
-            public void run() {
-                try {
-                    UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
-                } catch (Exception ex) {
-                    System.out.println("Exception: " + ex);
-                }
+            public void run() {  
                 
-                MainMenu.MainMenu();
+                Player player = new Player();
+                Enemy enemy = new Enemy();
+                Battle battle = new Battle();
+                
+                player.setHealth(15);
+                player.setMaxHealth(15);
+                enemy.setName("Enemy");
+                
+                battle.Battle( player, enemy );
+                
             }
         });
     }
