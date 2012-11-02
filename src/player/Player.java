@@ -36,6 +36,7 @@ public class Player extends Robot {
                 + "Level: " + getLevel() + "\n"
                 + "Experience: " + getExperience() + "\n"
                 + "Health: " + getHealth() + "/" + getBaseMaxHealth() + "\n"
+                + "Shield: " + getShield() + "/" + getBaseMaxShield() + "\n"
                 + "Physical Attack: " + getBasePhysAttack() + "\n"
                 + "Special Attack: " + getBaseSpecAttack() + "\n"
                 + "Physical Defense: " + getBasePhysDefense() + "\n"

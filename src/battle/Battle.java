@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import player.Player;
 import robot.Ability;
+import robot.Ability.Target;
 import robot.Robot;
 import util.RNG;
 
@@ -18,12 +19,10 @@ public class Battle {
     Ability abilities = new Ability();
     private Boolean myTurn;
 
-    public void Battle(Player player, Enemy enemy) {
+    public void Battle(Player player, Enemy enemy) throws IOException {
 
         //  open up standard input
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println(player.getStats());
-        System.out.println(enemy.getStats());
 
         // Determine who goes first
         isFirst(player, enemy);
@@ -39,36 +38,25 @@ public class Battle {
                 }
                 System.out.print("\nEnter value: ");
                 // Get input
-                try {
-                    input = br.readLine();
-                } catch (IOException ex) {
-                    System.out.println("ReadLine Exception: " + ex);
-                }
+                input = br.readLine();
+
                 // Check that input is a number between 1-4
                 while (!isInteger(input) || Integer.parseInt(input) > player.getAbilities().size() || Integer.parseInt(input) < 1) {
                     System.out.print("Please enter a number 1-4: ");
-                    try {
-                        input = br.readLine();
-                    } catch (IOException ex) {
-                        System.out.println("ReadLine Exception: " + ex);
-                    }
+                    input = br.readLine();
                 }
 
                 // Assign value to ability
                 int value = Integer.parseInt(input) - 1;
                 Ability ability = player.getAbilities().get(value);
                 // Do battle stuff
-                System.out.println(player.getName() + " used " + ability.getName() + "");
-                enemy.setHealth(enemy.getHealth() - damageDone(player, enemy, ability));
-                System.out.println(enemy.getName() + " is at " + enemy.getHealth() + "\n");
+                combatAction(player, enemy, ability);
                 myTurn = false;
             } else {
                 // Enemy turn
-                int value = util.RNG.rand(0, enemy.getAbilities().size()-1);
+                int value = util.RNG.rand(0, enemy.getAbilities().size() - 1);
                 Ability ability = enemy.getAbilities().get(value);
-                System.out.println(enemy.getName() + " used " + ability.getName() + "");
-                player.setHealth(player.getHealth() - damageDone(enemy, player, ability));
-                System.out.println(player.getName() + " is at " + player.getHealth() + "\n");
+                combatAction(enemy, player, ability);
                 myTurn = true;
             }
         }
@@ -84,30 +72,47 @@ public class Battle {
     public Boolean isFirst(Player player, Enemy enemy) {
         if (player.getModSpeed() > enemy.getModSpeed()) {
             myTurn = true;
-            System.out.println("Player goes first!\n");
+            System.out.println(player.getName() + " goes first!\n");
         } else if (enemy.getModSpeed() > player.getModSpeed()) {
             myTurn = false;
-            System.out.println("Enemy goes first!\n");
+            System.out.println(enemy.getName() + " goes first!\n");
         } else {
             myTurn = true;
-            System.out.println("Player goes first!\n");
+            System.out.println(player.getName() + " goes first!\n");
         }
         return myTurn;
     }
 
-    public int damageDone(Robot source, Robot target, Ability ability) {
+    public void combatAction(Robot source, Robot target, Ability ability) {
         int damage = ability.getBasePower();
-
         boolean crit = RNG.proc(ability.getCritChance());
+        boolean hit = RNG.proc(ability.getHitChance());
+        
+        System.out.println(source.getName() + " used " + ability.getName() + "");
+        if (ability.isTargetEnemy()) {
+            if (hit) {
+                if (crit) {
+                    System.out.println("CRIT!");
+                    damage += source.getModAttack(ability.getDamageType());
+                }
+                damage += source.getModAttack(ability.getDamageType());
+                damage -= target.getModDefense(ability.getDamageType());
 
-        if (crit) {
-            System.out.println("CRIT!");
-            damage += source.getModAttack(ability.getDamageType());
+                if (target.getShield() > 0) {
+                    target.setShield(target.getShield() - damage);
+                } else {
+                    target.setHealth(target.getHealth() - damage);
+                }
+                System.out.println(target.getName() + " shield is at " + target.getShield());
+                System.out.println(target.getName() + " health is at " + target.getHealth() + "\n");
+            } else {
+                System.out.println("MISS!");
+                damage = 0;
+            }
+        } else {
+            source.setHealth(source.getHealth() + ability.getBasePower());
+            System.out.println(source.getName() + " health is at " + source.getHealth() + "\n");
         }
-        damage += source.getModAttack(ability.getDamageType());
-        damage -= target.getModDefense(ability.getDamageType());
-
-        return damage;
     }
 
     public boolean isInteger(String input) {

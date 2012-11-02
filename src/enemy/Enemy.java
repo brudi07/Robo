@@ -50,6 +50,7 @@ public final class Enemy extends Robot{
     public String getStats() {
         return ("Name: " + getName() + "\n"
                 + "Health: " + getHealth() + "\n"
+                + "Shield: " + getShield() + "\n"
                 + "Physical Attack: " + getBasePhysAttack() + "\n"
                 + "Special Attack: " + getBaseSpecAttack() + "\n"
                 + "Physical Defense: " + getBasePhysDefense() + "\n"

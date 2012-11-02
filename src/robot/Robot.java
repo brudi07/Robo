@@ -3,7 +3,6 @@ package robot;
 import java.util.ArrayList;
 import robot.Ability.DamageType;
 
-
 /**
  *
  * @author Ben Rudi
@@ -30,12 +29,24 @@ public class Robot {
     private int speed;
     //private Dice speedRate = new Dice( 1, 3 );
     private ArrayList<Ability> abilities = new ArrayList();
+    private Boolean headEquipped;
+    private Part head;
+    private Boolean chipEquipped;
+    private Part chip;
+    private Boolean legsEquipped;
+    private Part legs;
+    private Boolean rArmEquipped;
+    private Part rArm;
+    private Boolean lArmEquipped;
+    private Part lArm;
+    private Boolean chasisEquipped;
+    private Part chasis;
 
     public Robot() {
         name = "Bot";
         setLevel(1);
-        setHealth(10);
         setMaxHealth(10);
+        setHealth(10);
         setShield(10);
         setMaxShield(10);
         setPhysAttack(1);
@@ -44,9 +55,7 @@ public class Robot {
         setSpecDefense(1);
         setSpeed(1);
         addAbility(Ability.scratch);
-        addAbility(Ability.punch);
-        addAbility(Ability.kick);
-        addAbility(Ability.headbutt);
+        addAbility(Ability.heal);
     }
 
     // Name
@@ -73,7 +82,13 @@ public class Robot {
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        if (health > maxHealth){
+            this.health = maxHealth;
+        }else if (health < 0) {
+            this.health = 0;
+        } else {
+            this.health = health;
+        }
     }
 
     // Max Health
@@ -88,16 +103,20 @@ public class Robot {
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
-    
+
     // Shield
     public int getShield() {
         return shield;
     }
 
     public void setShield(int shield) {
-        this.shield = shield;
+        if (shield < 0) {
+            this.shield = 0;
+        } else {
+            this.shield = shield;
+        }
     }
-    
+
     // Max Shield
     public int getBaseMaxShield() {
         return maxShield;
@@ -219,6 +238,146 @@ public class Robot {
             return abilities.remove(ability);
         }
         return false;
+    }
+
+    public void equipHead(Part head) {
+        if (head.isHead()) {
+            this.head = head;
+            headEquipped = true;
+        } else {
+            headEquipped = false;
+            System.out.println("Cannot equip: Not a head part.");
+        }
+    }
+
+    public void equipChip(Part chip) {
+        if (chip.isChip()) {
+            this.chip = chip;
+            chipEquipped = true;
+        } else {
+            chipEquipped = false;
+            System.out.println("Cannot equip: Not a chip part.");
+        }
+    }
+
+    public void equipLegs(Part legs) {
+        if (legs.isLegs()) {
+            this.legs = legs;
+            legsEquipped = true;
+        } else {
+            legsEquipped = false;
+            System.out.println("Cannot equip: Not a legs part.");
+        }
+    }
+
+    public void equipRArm(Part rArm) {
+        if (rArm.isRightArm()) {
+            this.rArm = rArm;
+            rArmEquipped = true;
+        } else {
+            rArmEquipped = false;
+            System.out.println("Cannot equip: Not a right arm part.");
+        }
+    }
+
+    public void equipLArm(Part lArm) {
+        if (lArm.isLeftArm()) {
+            this.lArm = lArm;
+            lArmEquipped = true;
+        } else {
+            lArmEquipped = false;
+            System.out.println("Cannot equip: Not a left arm part.");
+        }
+    }
+
+    public void equipChasis(Part chasis) {
+        if (chasis.isChasis()) {
+            this.chasis = chasis;
+            chasisEquipped = true;
+        } else {
+            chasisEquipped = false;
+            System.out.println("Cannot equip: Not a chasis part.");
+        }
+    }
+
+    public void checkParts() {
+        if (headEquipped) {
+            setMaxHealth(maxHealth + head.getModMaxHealth());
+            setMaxShield(maxShield + head.getModMaxShield());
+            setPhysAttack(physAttack + head.getModPhysAttack());
+            setPhysDefense(physDefense + head.getModPhysDefense());
+            setSpecAttack(specAttack + head.getModSpecAttack());
+            setSpecDefense(specDefense + head.getModSpecDefense());
+            setSpeed(speed + head.getModSpeed());
+            if (!abilities.contains(head.getAbility())) {
+                addAbility(head.getAbility());
+            }
+        }
+        if (chipEquipped) {
+            setMaxHealth(maxHealth + chip.getModMaxHealth());
+            setMaxShield(maxShield + chip.getModMaxShield());
+            setPhysAttack(physAttack + chip.getModPhysAttack());
+            setPhysDefense(physDefense + chip.getModPhysDefense());
+            setSpecAttack(specAttack + chip.getModSpecAttack());
+            setSpecDefense(specDefense + chip.getModSpecDefense());
+            setSpeed(speed + chip.getModSpeed());
+            if (!abilities.contains(chip.getAbility())) {
+                addAbility(chip.getAbility());
+            }
+        }
+        if (legsEquipped) {
+            setMaxHealth(maxHealth + legs.getModMaxHealth());
+            setMaxShield(maxShield + legs.getModMaxShield());
+            setPhysAttack(physAttack + legs.getModPhysAttack());
+            setPhysDefense(physDefense + legs.getModPhysDefense());
+            setSpecAttack(specAttack + legs.getModSpecAttack());
+            setSpecDefense(specDefense + legs.getModSpecDefense());
+            setSpeed(speed + legs.getModSpeed());
+            if (!abilities.contains(legs.getAbility())) {
+                addAbility(legs.getAbility());
+            }
+        }
+        if (rArmEquipped) {
+            setMaxHealth(maxHealth + rArm.getModMaxHealth());
+            setMaxShield(maxShield + rArm.getModMaxShield());
+            setPhysAttack(physAttack + rArm.getModPhysAttack());
+            setPhysDefense(physDefense + rArm.getModPhysDefense());
+            setSpecAttack(specAttack + rArm.getModSpecAttack());
+            setSpecDefense(specDefense + rArm.getModSpecDefense());
+            setSpeed(speed + rArm.getModSpeed());
+            if (!abilities.contains(rArm.getAbility())) {
+                addAbility(rArm.getAbility());
+            }
+        }
+        if (lArmEquipped) {
+            setMaxHealth(maxHealth + lArm.getModMaxHealth());
+            setMaxShield(maxShield + lArm.getModMaxShield());
+            setPhysAttack(physAttack + lArm.getModPhysAttack());
+            setPhysDefense(physDefense + lArm.getModPhysDefense());
+            setSpecAttack(specAttack + lArm.getModSpecAttack());
+            setSpecDefense(specDefense + lArm.getModSpecDefense());
+            setSpeed(speed + lArm.getModSpeed());
+            if (!abilities.contains(lArm.getAbility())) {
+                addAbility(lArm.getAbility());
+            }
+        }
+        if (chasisEquipped) {
+            setMaxHealth(maxHealth + chasis.getModMaxHealth());
+            setMaxShield(maxShield + chasis.getModMaxShield());
+            setPhysAttack(physAttack + chasis.getModPhysAttack());
+            setPhysDefense(physDefense + chasis.getModPhysDefense());
+            setSpecAttack(specAttack + chasis.getModSpecAttack());
+            setSpecDefense(specDefense + chasis.getModSpecDefense());
+            setSpeed(speed + chasis.getModSpeed());
+            if (!abilities.contains(chasis.getAbility())) {
+                addAbility(chasis.getAbility());
+            }
+        }
+    }
+
+    public void heal() {
+        health = maxHealth;
+        shield = maxShield;
     }
 
     // Level Up

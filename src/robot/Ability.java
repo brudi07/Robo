@@ -6,77 +6,101 @@ package robot;
  */
 public final class Ability {
 
-	private String name;
-	private String element;
-	private int basePower;
-	private int critChance;
-	private DamageType damageType;
+    private String name;
+    private int basePower;
+    private int critChance;
+    private int hitChance;
+    private DamageType damageType;
+    private Target target;
 
-	public enum DamageType {
-		PHYSICAL,
-		SPECIAL
-	}
+    public enum DamageType {
 
-        public Ability() {}
-        
-	public Ability( String eName, String eElement, DamageType eDamageType, int eBasePower, int eCritChance ) {
-		setName( eName );
-		setElement( eElement );
-		setDamageType( eDamageType );
-		setBasePower( eBasePower );
-		setCritChance( eCritChance );
-	}
-	
-	public String getName() {
-		return name;
-	}
+        PHYSICAL,
+        SPECIAL
+    }
 
-	public void setName( String name ) {
-		this.name = name;
-	}
+    public enum Target {
 
-	public int getBasePower() {
-		return basePower;
-	}
+        ENEMY,
+        SELF
+    }
 
-	public void setBasePower( int basePower ) {
-		this.basePower = basePower;
-	}
+    public Ability() {
+    }
 
-	public DamageType getDamageType() {
-		return damageType;
-	}
+    public Ability(String eName, DamageType eDamageType, int eBasePower, int eCritChance, int eHitChance, Target eTarget) {
+        setName(eName);
+        setDamageType(eDamageType);
+        setBasePower(eBasePower);
+        setCritChance(eCritChance);
+        setHitChance(eHitChance);
+        setTarget(eTarget);
+    }
 
-	public void setDamageType( DamageType damageType ) {
-		this.damageType = damageType;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public int getCritChance() {
-		return critChance;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setCritChance( int critChance ) {
-		this.critChance = critChance;
-	}
+    public int getBasePower() {
+        return basePower;
+    }
 
-	public String getElement() {
-		return element;
-	}
+    public void setBasePower(int basePower) {
+        this.basePower = basePower;
+    }
 
-	public void setElement( String element ) {
-		this.element = element;
-	}
-	
-	public boolean isPhysical(){
-		return DamageType.PHYSICAL.equals( getDamageType() );
-	}
-	
-	public boolean isSpecial(){
-		return DamageType.SPECIAL.equals( getDamageType() );
-	}
-	
-	public static Ability scratch = new Ability("Scratch", "Normal", DamageType.PHYSICAL, 1, 20);
-        public static Ability punch = new Ability("Punch", "Normal", DamageType.PHYSICAL, 2, 20);
-        public static Ability kick = new Ability("Kick", "Normal", DamageType.PHYSICAL, 2, 20);
-        public static Ability headbutt = new Ability("Headbutt", "Normal", DamageType.PHYSICAL, 1, 80);
+    public DamageType getDamageType() {
+        return damageType;
+    }
+
+    public void setDamageType(DamageType damageType) {
+        this.damageType = damageType;
+    }
+
+    public Target getTarget() {
+        return target;
+    }
+
+    public void setTarget(Target target) {
+        this.target = target;
+    }
+
+    public int getCritChance() {
+        return critChance;
+    }
+
+    public void setCritChance(int critChance) {
+        this.critChance = critChance;
+    }
+
+    public int getHitChance() {
+        return hitChance;
+    }
+
+    public void setHitChance(int hitChance) {
+        this.hitChance = hitChance;
+    }
+
+    public boolean isPhysical() {
+        return DamageType.PHYSICAL.equals(getDamageType());
+    }
+
+    public boolean isSpecial() {
+        return DamageType.SPECIAL.equals(getDamageType());
+    }
+    
+    public boolean isTargetEnemy() {
+        return Target.ENEMY.equals(getTarget());
+    }
+
+    public static Ability scratch = new Ability("Scratch", DamageType.PHYSICAL, 1, 20, 100, Target.ENEMY);
+    public static Ability punch = new Ability("Punch", DamageType.PHYSICAL, 2, 20, 95, Target.ENEMY);
+    public static Ability kick = new Ability("Kick", DamageType.PHYSICAL, 2, 20, 80, Target.ENEMY);
+    public static Ability headbutt = new Ability("Headbutt", DamageType.PHYSICAL, 2, 80, 75, Target.ENEMY);
+    public static Ability overload = new Ability("Overload", DamageType.PHYSICAL, 5, 5, 25, Target.ENEMY);
+    public static Ability heal = new Ability("Heal", DamageType.PHYSICAL, 1, 0, 100, Target.SELF);
 }

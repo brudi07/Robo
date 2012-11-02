@@ -19,7 +19,7 @@ public final class Part {
 
     public enum PartType {
         HEAD,
-        BODY,
+        CHIP,
         LEGS,
         RIGHTARM,
         LEFTARM,
@@ -129,8 +129,8 @@ public final class Part {
         return PartType.HEAD.equals(getPartType());
     }
 
-    public boolean isBody() {
-        return PartType.BODY.equals(getPartType());
+    public boolean isChip() {
+        return PartType.CHIP.equals(getPartType());
     }
     
     public boolean isLegs() {
@@ -150,4 +150,9 @@ public final class Part {
     }
     
     public static Part headPart = new Part("Head Part", 1, 1, 0, 0, 0, 0, 0, Ability.headbutt, PartType.HEAD);
+    public static Part chipPart = new Part("Chip Part", 1, 1, 0, 0, 0, 0, 0, Ability.overload, PartType.CHIP);
+    public static Part legsPart = new Part("Legs Part", 1, 1, 0, 0, 0, 0, 0, Ability.kick, PartType.LEGS);
+    public static Part rArmPart = new Part("Right Arm Part", 1, 1, 0, 0, 0, 0, 0, Ability.punch, PartType.RIGHTARM);
+    public static Part lArmPart = new Part("Left Arm Part", 1, 1, 0, 0, 0, 0, 0, Ability.punch, PartType.LEFTARM);
+    public static Part chasisPart = new Part("Chasis Part", 1, 1, 0, 0, 0, 0, 0, Ability.scratch, PartType.CHASIS);
 }
