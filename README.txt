@@ -1,1 +1,1 @@
-Working on creating a base foundation for a RPG. Hoping to take parts of the Pokemon RPG battle formula and incorporate it into a robot themed game.
+Working on creating a base foundation for an RPG. Hoping to take parts of the Pokemon RPG battle formula and incorporate it into a robot themed game.
