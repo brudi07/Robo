@@ -154,5 +154,7 @@ public final class Part {
     public static Part legsPart = new Part("Legs Part", 1, 1, 0, 0, 0, 0, 0, Ability.kick, PartType.LEGS);
     public static Part rArmPart = new Part("Right Arm Part", 1, 1, 0, 0, 0, 0, 0, Ability.punch, PartType.RIGHTARM);
     public static Part lArmPart = new Part("Left Arm Part", 1, 1, 0, 0, 0, 0, 0, Ability.punch, PartType.LEFTARM);
-    public static Part chasisPart = new Part("Chasis Part", 1, 1, 0, 0, 0, 0, 0, Ability.scratch, PartType.CHASIS);
+    public static Part rArmSpecPart = new Part("Right Spec Arm Part", 1, 1, 0, 0, 1, 1, 0, Ability.sword, PartType.RIGHTARM);
+    public static Part lArmSpecPart = new Part("Left Spec Arm Part", 1, 1, 0, 0, 1, 1, 0, Ability.missile, PartType.LEFTARM);
+    public static Part chasisPart = new Part("Chasis Part", 1, 1, 0, 0, 0, 0, 0, Ability.heal, PartType.CHASIS);
 }

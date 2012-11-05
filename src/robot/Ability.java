@@ -99,8 +99,10 @@ public final class Ability {
 
     public static Ability scratch = new Ability("Scratch", DamageType.PHYSICAL, 1, 20, 100, Target.ENEMY);
     public static Ability punch = new Ability("Punch", DamageType.PHYSICAL, 2, 20, 95, Target.ENEMY);
-    public static Ability kick = new Ability("Kick", DamageType.PHYSICAL, 2, 20, 80, Target.ENEMY);
+    public static Ability kick = new Ability("Kick", DamageType.PHYSICAL, 2, 30, 85, Target.ENEMY);
     public static Ability headbutt = new Ability("Headbutt", DamageType.PHYSICAL, 2, 80, 75, Target.ENEMY);
-    public static Ability overload = new Ability("Overload", DamageType.PHYSICAL, 5, 5, 25, Target.ENEMY);
-    public static Ability heal = new Ability("Heal", DamageType.PHYSICAL, 1, 0, 100, Target.SELF);
+    public static Ability overload = new Ability("Overload", DamageType.SPECIAL, 5, 5, 25, Target.ENEMY);
+    public static Ability heal = new Ability("Heal", DamageType.SPECIAL, 1, 25, 75, Target.SELF);
+    public static Ability sword = new Ability("Beam Sword", DamageType.SPECIAL, 2, 20, 95, Target.ENEMY);
+    public static Ability missile = new Ability("Missile", DamageType.SPECIAL, 2, 30, 85, Target.ENEMY);
 }

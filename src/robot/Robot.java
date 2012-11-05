@@ -54,8 +54,6 @@ public class Robot {
         setPhysDefense(1);
         setSpecDefense(1);
         setSpeed(1);
-        addAbility(Ability.scratch);
-        addAbility(Ability.heal);
     }
 
     // Name

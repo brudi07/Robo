@@ -40,19 +40,29 @@ public class Run {
             Enemy enemy = new Enemy();
             Battle battle = new Battle();
 
+            player.setName("Player");
             player.setHealth(15);
             player.setMaxHealth(15);
-            enemy.setName("Enemy");
             player.equipHead(Part.headPart);
             player.equipChip(Part.chipPart);
             player.equipLegs(Part.legsPart);
-            player.equipRArm(Part.rArmPart);
-            player.equipLArm(Part.lArmPart);
+            player.equipRArm(Part.rArmSpecPart);
+            player.equipLArm(Part.lArmSpecPart);
             player.equipChasis(Part.chasisPart);
             player.checkParts();
             player.heal();
+            enemy.setName("Enemy");
+            enemy.equipHead(Part.headPart);
+            enemy.equipChip(Part.chipPart);
+            enemy.equipLegs(Part.legsPart);
+            enemy.equipRArm(Part.rArmPart);
+            enemy.equipLArm(Part.lArmPart);
+            enemy.equipChasis(Part.chasisPart);
+            enemy.checkParts();
+            enemy.heal();
             
             System.out.println(player.getStats());
+            System.out.println(enemy.getStats());
 
             battle.Battle(player, enemy);
 

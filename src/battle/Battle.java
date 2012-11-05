@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import player.Player;
 import robot.Ability;
-import robot.Ability.Target;
 import robot.Robot;
 import util.RNG;
 
@@ -42,7 +41,7 @@ public class Battle {
 
                 // Check that input is a number between 1-4
                 while (!isInteger(input) || Integer.parseInt(input) > player.getAbilities().size() || Integer.parseInt(input) < 1) {
-                    System.out.print("Please enter a number 1-4: ");
+                    System.out.print("Please enter a valid number: ");
                     input = br.readLine();
                 }
 
@@ -84,34 +83,47 @@ public class Battle {
     }
 
     public void combatAction(Robot source, Robot target, Ability ability) {
-        int damage = ability.getBasePower();
+        int power = ability.getBasePower();
         boolean crit = RNG.proc(ability.getCritChance());
         boolean hit = RNG.proc(ability.getHitChance());
-        
+
         System.out.println(source.getName() + " used " + ability.getName() + "");
         if (ability.isTargetEnemy()) {
             if (hit) {
                 if (crit) {
                     System.out.println("CRIT!");
-                    damage += source.getModAttack(ability.getDamageType());
+                    power += source.getBasePhysAttack();
                 }
-                damage += source.getModAttack(ability.getDamageType());
-                damage -= target.getModDefense(ability.getDamageType());
+
+                if (ability.isPhysical()) {
+                    power += source.getBasePhysAttack();
+                    power -= target.getBasePhysDefense();
+                } else {
+                    power += source.getBaseSpecAttack();
+                    power -= target.getBaseSpecDefense();
+                }
 
                 if (target.getShield() > 0) {
-                    target.setShield(target.getShield() - damage);
+                    target.setShield(target.getShield() - power);
                 } else {
-                    target.setHealth(target.getHealth() - damage);
+                    target.setHealth(target.getHealth() - power);
                 }
                 System.out.println(target.getName() + " shield is at " + target.getShield());
                 System.out.println(target.getName() + " health is at " + target.getHealth() + "\n");
             } else {
-                System.out.println("MISS!");
-                damage = 0;
+                System.out.println("MISS!\n");
+                power = 0;
             }
         } else {
-            source.setHealth(source.getHealth() + ability.getBasePower());
-            System.out.println(source.getName() + " health is at " + source.getHealth() + "\n");
+            if (hit) {
+                if (crit) {
+                    power += ability.getBasePower();
+                }
+                source.setHealth(source.getHealth() + power);
+                System.out.println(source.getName() + " health is at " + source.getHealth() + "\n");
+            } else {
+                System.out.println(ability.getName() + " does nothing...\n");
+            }
         }
     }
 
